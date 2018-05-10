@@ -1,8 +1,6 @@
-# homebrewchat
-homebrewing Slack community member map
+# Colorbline Cursor Test
+Testing how cursors look against a map if you are colorblind
 
-Add yourself to the map here: http://dmofot.github.io/homebrewchat/
+See the map here: https://dmofot.github.io/colorblind/
 
-See the results here: http://dmofot.github.io/homebrewchat/results/
-
-This is a modified version of a [@vtcraghead](https://github.com/wboykinm/) joint.
+See how the map looks if you are colorblind here: https://www.toptal.com/designers/colorfilter
