@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Colorblind Map Cursor Test</title>
+  	<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/superhero/bootstrap.min.css" rel="stylesheet">
+  	<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+  		<!--[if lte IE 8]>
+  			<link href='http://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.ie.css' rel='stylesheet'>
+  		<![endif]-->
+  	<style>
+  		.starter-template {
+  			padding: 10px 15px 0px;
+  			text-align: center;
+  		}
+  		.submit-template {
+  			padding: 5px 15px 0px;
+  			text-align: center;
+  		}
+  		#map {
+  			height:600px;
+  			width:100%;
+  		}
+  		#centerpoint {
+  			display: none;
+  			width: 128px;
+  			height: 128px;
+  			background: transparent url(img/crosshair6.png) 0 0 no-repeat scroll;
+  			overflow: visible;
+  			position: absolute;
+  			top: 50%;
+  			left: 50%;
+  			margin: -64px 0 0 -64px;
+  			pointer-events: none;
+  			z-index: 11;
+  			opacity: 1;
+  			-webkit-transition: opacity 0.25s;
+  			-moz-transition: opacity 0.25s;
+  			-o-transition: opacity 0.25s;
+  			-ms-transition: opacity 0.25s;
+  			transition: opacity 0.25s;
+  		}
+        img.resize {
+            max-width:5%;
+            max-height:5%;
+        }
+  	</style>
+</head>
+<body>
+		<div class="container">
+			<div class="jumbotron starter-template"><h1>Colorblind Map Cursor Test</h1></div>
+			<div class="starter-template">
+				<div id="map">
+					<span id="centerpoint" class="" style="display: inline;">
+						<span class="shadow"></span>
+						<span class="x"></span>
+						<span class="marker"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+	<script type='text/javascript'>
+		// Set default location in case the IP doesn't have one
+		var y = 37.09024;
+		var x = -95.71289;
+		var z = 8;
+
+		// Build the map
+		bounds = new L.LatLngBounds(new L.LatLng(-89.98155760646617, -180), new L.LatLng(89.99346179538875, 180));
+		L.mapbox.accessToken = 'pk.eyJ1IjoiZG1vZm90IiwiYSI6IjMyODFmMjkwYTQ1NjUxYTEzOWYwOGZlMTMxY2FjZThiIn0.eNpL_ksyAN2Tcy5UeLqhyQ';
+		var map = L.mapbox.map('map', 'mapbox.streets', {
+			scrollWheelZoom:false,
+			maxBounds: bounds,
+			maxBoundsViscosity: 0.75,
+			attributionControl: {
+				compact: true
+			}
+		}).setView([y, x], z);
+
+		// Grab IP location from geoip-db API
+		$.getJSON('https://www.geoip-db.com/json/', function(json) {
+			if (json) {
+				y = json.latitude;
+				x = json.longitude;
+				z = 8
+				map.panTo([y, x]);
+			}
+		});
+	</script>
+</body>
+</html>
